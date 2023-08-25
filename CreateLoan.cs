@@ -15,6 +15,16 @@ namespace Loan_Application_System
         }
 
         public double PrimeIntRate { get => primeIntRate; set => primeIntRate = value; }
+
+        public override double overMaxLoan()
+        {
+            if (LoanAmount > 100000)
+            {
+                return 1;
+            }
+            else return 0;
+            
+        }
     }
 
 }
