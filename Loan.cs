@@ -22,7 +22,7 @@ namespace Loan_Application_System
             this.Term = term;
             if (loanAmount > 100000)
             {
-                this.loanAmount = 100000;
+                this.LoanAmount = loanAmount;
                 Console.WriteLine("Max Loan Amount is R100 000");
             }
             else { this.LoanAmount = loanAmount; }
@@ -40,11 +40,12 @@ namespace Loan_Application_System
         public double LoanAmount { get => loanAmount; set => loanAmount = value; }
         public double InterestRate { get => interestRate; set => interestRate = value; }
         public int Term { get => term; set => term = value; }
-
+        
         public override string ToString()
         {
-            return $"Loan Number: \t{loanNumber} \n Customer lastname: \t{custLastname} \n Customer Name: \t{custFirstname} \n Loan Amount: \t{loanAmount} \n Interest Rate: \t {interestRate} \n Term: \t {term}";
+             return $"Loan Number: \t \t{loanNumber} \n Customer lastname: \t{custLastname} \n Customer Name: \t{custFirstname} \n Loan Amount: \t\t{loanAmount} \n Interest Rate: \t {interestRate} \n Term: \t \t \t{term}";               
         }
+        public abstract double overMaxLoan();
     }
 
 
