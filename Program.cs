@@ -11,6 +11,7 @@ namespace Loan_Application_System
         static void Main(string[] args)
         {
             //this x3
+            double primeInterestRate;
         }
     }
 }
