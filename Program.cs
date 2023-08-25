@@ -10,10 +10,6 @@ namespace Loan_Application_System
     {
         static void Main(string[] args)
         {
-
-            //this x3
-            double primeInterestRate;
-
             CreateLoan[] loanArray = new CreateLoan[5];
             List<CreateLoan> loanList = new List<CreateLoan>();
             for (int i = 0; i < 5; i++)
@@ -56,12 +52,10 @@ namespace Loan_Application_System
             foreach (CreateLoan loan in loanArray)
             {
                 Console.WriteLine(loan);
+                Console.WriteLine(" ");
             }
 
             //Need interest rate and Loan Number -> probably random generated.
-
-
-
         }
     }
 }
