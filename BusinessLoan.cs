@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Loan_Application_System
 {
-    internal class PersonalLoan
+    internal class BusinessLoan
     {
     }
 }
