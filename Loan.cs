@@ -106,8 +106,10 @@ namespace Loan_Application_System
         /// <returns>Random integer</returns>
         private int randomInteger()
         {
+
             var random = new Random();
             return random.Next(0, 10000);
+
         }
     }
 

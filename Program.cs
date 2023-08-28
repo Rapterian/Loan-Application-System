@@ -11,6 +11,7 @@ namespace Loan_Application_System
         static void Main(string[] args)
         {
 
+
             Console.Write("Enter Prime Interest Rate:\t");
             double primeInterestRate = double.Parse(Console.ReadLine());
 
@@ -30,6 +31,7 @@ namespace Loan_Application_System
                 Console.Write("Enter Lastname:\t");
                 string custLastname = Console.ReadLine();
 
+
                 CreateLoan newLoan = new CreateLoan(primeInterestRate, custLastname, custFirstname);
                 loanArray[i] = newLoan;
 
@@ -43,6 +45,7 @@ namespace Loan_Application_System
                     }
                 } while (loanArray[i].overMaxLoan());
 
+
                 Console.Write("Enter Interest Rate:\t");
                 loanArray[i].InterestRate = double.Parse(Console.ReadLine());
 
@@ -51,14 +54,39 @@ namespace Loan_Application_System
 
                 
             }
-
+            Console.Clear();    
             foreach (CreateLoan loan in loanArray)
             {
-                Console.WriteLine(loan.ToString());
+
+                Console.WriteLine(loan);
+                Console.WriteLine(" ");
             }
 
-           
-
+            //Need interest rate and Loan Number -> probably random generated.
+        }
+        static double doubleCheck()
+        {
+            double loanAmount = 0;
+            do
+            {
+                try
+                {
+                    Console.WriteLine("Enter loan amount: Please use a ',' for decimals.");
+                    loanAmount = double.Parse(Console.ReadLine());
+                    if (loanAmount > 100000)
+                    {
+                        Console.WriteLine("Loan cannot be more than R100 000. Please re-enter loan amount.");
+                    } else if (loanAmount < 5000)
+                    {
+                        Console.WriteLine("Loan is too small. Please re-enter loan amount.");
+                    }
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Loan has invalid input. Please re-enter.");
+                }
+            } while (loanAmount > 100000 || loanAmount < 5000);
+            return loanAmount;
         }
         
     }
