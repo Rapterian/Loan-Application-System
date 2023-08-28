@@ -50,7 +50,7 @@ namespace Loan_Application_System
                     $"Enter Term:                       \t");
                 int term = int.Parse(Console.ReadLine());
 
-                CreateLoan newLoan = new CreateLoan(primeInterestRate, loanNumber, custLastname, custFirstname, loanAmount, interestRate, term);
+                CreateLoan newLoan = new CreateLoan(primeInterestRate, custLastname, custFirstname);
                 loanArray[i] = newLoan;
             }
 
@@ -61,8 +61,9 @@ namespace Loan_Application_System
 
             //Need interest rate and Loan Number -> probably random generated.
 
-
+           
 
         }
+        
     }
 }
