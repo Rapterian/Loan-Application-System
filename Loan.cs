@@ -38,12 +38,20 @@ namespace Loan_Application_System
         /// </summary>
         /// <param name="custLastname">Customers Last Name</param>
         /// <param name="custFirstname">Customers First Name</param>
-        public Loan( string custLastname, string custFirstname)
+        public Loan(double interestRate ,string custLastname, string custFirstname)
         {
             LoanNumber = randomInteger();
             CustLastname = custLastname;
             CustFirstname = custFirstname;
+            InterestRate = interestRate;
         }
+
+        protected Loan(string custLastname, string custFirstname)
+        {
+            CustLastname = custLastname;
+            CustFirstname = custFirstname;
+        }
+
         /// <summary>
         /// Loan number is randomly generated thus it only gets a get function
         /// </summary>
@@ -83,6 +91,18 @@ namespace Loan_Application_System
         public bool overMaxLoan()
         {
             if (LoanAmount > maxLoanAmount)
+            {
+                return true;
+            }
+            else { return false; }
+        }
+        /// <summary>
+        /// Checks wether loan amount is less than min amount permitted
+        /// </summary>
+        /// <returns>boolean</returns>
+        public bool underMinLoan()
+        {
+            if (LoanAmount < maxLoanAmount)
             {
                 return true;
             }
