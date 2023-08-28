@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,23 +8,13 @@ namespace Loan_Application_System
 {
     internal class CreateLoan : Loan
     {
-        private double primeIntRate;
-        public CreateLoan(double primeIntRate, string loanNumber, string custLastname, string custFirstname, double loanAmount, double interestRate, int term) : base(loanNumber, custLastname, custFirstname, loanAmount, interestRate, term)
+        public CreateLoan(double primeInterestRate, string custLastname, string custFirstname) : base(custLastname, custFirstname)
         {
-            this.PrimeIntRate = primeIntRate;
+            PrimeInterestRate = primeInterestRate;
         }
 
-        public double PrimeIntRate { get => primeIntRate; set => primeIntRate = value; }
-
-        public override double overMaxLoan()
-        {
-            if (LoanAmount > 100000)
-            {
-                return 1;
-            }
-            else return 0;
-            
-        }
+        public double PrimeInterestRate { get; set; }
+        
     }
 
 }

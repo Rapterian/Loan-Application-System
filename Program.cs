@@ -10,38 +10,54 @@ namespace Loan_Application_System
     {
         static void Main(string[] args)
         {
-            CreateLoan[] loanArray = new CreateLoan[1];
+
+
+            Console.Write("Enter Prime Interest Rate:\t");
+            double primeInterestRate = double.Parse(Console.ReadLine());
+
+            CreateLoan[] loanArray = new CreateLoan[5];
             List<CreateLoan> loanList = new List<CreateLoan>();
-            Console.Clear();
-            Console.WriteLine("Enter Prime Interest Rate:");
-            double primeIntRate = double.Parse(Console.ReadLine());
             for (int i = 0; i < 1; i++)
             {
                 Console.Clear();
-                Console.WriteLine($"Current Prime interest rate: {primeIntRate/100d}%");
-                Console.WriteLine("Enter Loan Number:");
+                Console.Write($"Prime Interest Rate:\t{primeInterestRate}%");
+
+                Console.Write("Enter Loan Number:\t");
                 string loanNumber = Console.ReadLine();
 
-                Console.WriteLine("Enter Firstname:");
+                Console.Write("Enter Firstname:\t");
                 string custFirstname = Console.ReadLine();
 
-                Console.WriteLine("Enter Lastname:");
+                Console.Write("Enter Lastname:\t");
                 string custLastname = Console.ReadLine();
 
-                double loanAmount = doubleCheck();
 
-                Console.WriteLine("Enter Interest Rate:");
-                double interestRate = double.Parse(Console.ReadLine());
-
-                Console.WriteLine("Enter Term:");
-                int term = int.Parse(Console.ReadLine());
-
-                CreateLoan newLoan = new CreateLoan(primeIntRate, loanNumber, custLastname, custFirstname, loanAmount, interestRate, term);
+                CreateLoan newLoan = new CreateLoan(primeInterestRate, custLastname, custFirstname);
                 loanArray[i] = newLoan;
+
+                do
+                {
+                    Console.Write("Enter Loan Amount:\t");
+                    loanArray[i].LoanAmount = float.Parse(Console.ReadLine());
+                    if (loanArray[i].overMaxLoan())
+                    {
+                        Console.WriteLine("Loan amount exceeds R100 000. Please re-enter the loan amount.");
+                    }
+                } while (loanArray[i].overMaxLoan());
+
+
+                Console.Write("Enter Interest Rate:\t");
+                loanArray[i].InterestRate = double.Parse(Console.ReadLine());
+
+                Console.Write($"Loan term ({loanArray[i].shortTerm} for Short Term, {loanArray[i].mediumTerm} for Medium Term, {loanArray[i].longTerm} for Long Term):");
+                loanArray[i].Term = int.Parse(Console.ReadLine());
+
+                
             }
             Console.Clear();    
             foreach (CreateLoan loan in loanArray)
             {
+
                 Console.WriteLine(loan);
                 Console.WriteLine(" ");
             }
@@ -72,5 +88,6 @@ namespace Loan_Application_System
             } while (loanAmount > 100000 || loanAmount < 5000);
             return loanAmount;
         }
+        
     }
 }
