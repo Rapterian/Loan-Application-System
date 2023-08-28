@@ -10,14 +10,15 @@ namespace Loan_Application_System
     {
         static void Main(string[] args)
         {
-            CreateLoan[] loanArray = new CreateLoan[5];
+            CreateLoan[] loanArray = new CreateLoan[1];
             List<CreateLoan> loanList = new List<CreateLoan>();
-            for (int i = 0; i < 5; i++)
+            Console.Clear();
+            Console.WriteLine("Enter Prime Interest Rate:");
+            double primeIntRate = double.Parse(Console.ReadLine());
+            for (int i = 0; i < 1; i++)
             {
                 Console.Clear();
-                Console.WriteLine("Enter Prime Interest Rate:");
-                double primeIntRate = double.Parse(Console.ReadLine());
-
+                Console.WriteLine($"Current Prime interest rate: {primeIntRate/100d}%");
                 Console.WriteLine("Enter Loan Number:");
                 string loanNumber = Console.ReadLine();
 
@@ -27,17 +28,7 @@ namespace Loan_Application_System
                 Console.WriteLine("Enter Lastname:");
                 string custLastname = Console.ReadLine();
 
-                double loanAmount;
-                do
-                {
-                    Console.WriteLine("Enter Loan Amount:");
-                    loanAmount = float.Parse(Console.ReadLine());
-                    //NEED TO CHANGE THIS TO METHOD FROM LOAN CLASS -> maxLoanAmount
-                    if (loanAmount > 100000)
-                    {
-                        Console.WriteLine("Loan amount exceeds R100 000. Please re-enter the loan amount.");
-                    }
-                } while (loanAmount > 100000);
+                double loanAmount = doubleCheck();
 
                 Console.WriteLine("Enter Interest Rate:");
                 double interestRate = double.Parse(Console.ReadLine());
@@ -48,7 +39,7 @@ namespace Loan_Application_System
                 CreateLoan newLoan = new CreateLoan(primeIntRate, loanNumber, custLastname, custFirstname, loanAmount, interestRate, term);
                 loanArray[i] = newLoan;
             }
-
+            Console.Clear();    
             foreach (CreateLoan loan in loanArray)
             {
                 Console.WriteLine(loan);
@@ -56,6 +47,30 @@ namespace Loan_Application_System
             }
 
             //Need interest rate and Loan Number -> probably random generated.
+        }
+        static double doubleCheck()
+        {
+            double loanAmount = 0;
+            do
+            {
+                try
+                {
+                    Console.WriteLine("Enter loan amount: Please use a ',' for decimals.");
+                    loanAmount = double.Parse(Console.ReadLine());
+                    if (loanAmount > 100000)
+                    {
+                        Console.WriteLine("Loan cannot be more than R100 000. Please re-enter loan amount.");
+                    } else if (loanAmount < 5000)
+                    {
+                        Console.WriteLine("Loan is too small. Please re-enter loan amount.");
+                    }
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Loan has invalid input. Please re-enter.");
+                }
+            } while (loanAmount > 100000 || loanAmount < 5000);
+            return loanAmount;
         }
     }
 }

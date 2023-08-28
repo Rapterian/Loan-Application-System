@@ -43,7 +43,7 @@ namespace Loan_Application_System
         
         public override string ToString()
         {
-             return $"Loan Number: \t \t{loanNumber} \n Customer lastname: \t{custLastname} \n Customer Name: \t{custFirstname} \n Loan Amount: \t\t{loanAmount} \n Interest Rate: \t {interestRate} \n Term: \t \t \t{term}";               
+             return $"Loan Number: \t \t{loanNumber} \n Customer lastname: \t{custLastname} \n Customer Name: \t{custFirstname} \n Loan Amount: \t\t{loanAmount} \n Interest Rate: \t {interestRate/100d}% \n Term: \t \t \t{term}";               
         }
         public abstract double overMaxLoan();
     }
