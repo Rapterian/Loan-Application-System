@@ -8,13 +8,16 @@ namespace Loan_Application_System
 {
     internal class CreateLoan : Loan
     {
-        public CreateLoan(double primeInterestRate, string custLastname, string custFirstname) : base(custLastname, custFirstname)
+        public CreateLoan(double interestRate, string custLastname, string custFirstname) : base(interestRate, custLastname, custFirstname)
         {
-            PrimeInterestRate = primeInterestRate;
         }
 
-        public double PrimeInterestRate { get; set; }
-        
+        public double CalculateInterest()
+        {
+            double interest=0;
+            //TODO - Interest = LoanAmount * InterestRate * LoanTerm
+            return interest;
+        }
     }
 
 }
