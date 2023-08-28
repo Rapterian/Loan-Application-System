@@ -6,52 +6,111 @@ using System.Threading.Tasks;
 
 namespace Loan_Application_System
 {
+    /// <summary>
+    /// Abstract class implementing the LoanConstants Interface. 
+    /// This base class stores all necesary info about a loan in one object
+    /// as well as have some useful functions.
+    /// </summary>
     abstract class Loan:LoanConstants
     {
+        /// <summary>
+        /// The constant amount of years for the Short Term 
+        /// </summary>
         public int shortTerm { get { return 1; } }
+        /// <summary>
+        /// The constant amount of years for the Medium Term 
+        /// </summary>
         public int mediumTerm { get { return 3; } }
+        /// <summary>
+        /// The constant amount of years for the Long Term 
+        /// </summary>
         public int longTerm { get { return 5; } }
-        public string companyName { get { return ""; } }
+        /// <summary>
+        /// The company name as a constant value
+        /// </summary>
+        public string companyName { get { return "Loan Sharks"; } }
+        /// <summary>
+        /// The max amount you may borrow as a constant
+        /// </summary>
         public double maxLoanAmount { get { return 100000d; } }
-
-        private string loanNumber, custLastname, custFirstname;
-        private double loanAmount, interestRate;
-        private int term;
-
-        public Loan(string loanNumber, string custLastname, string custFirstname, double loanAmount, double interestRate, int term)
+        /// <summary>
+        /// Constructor for a Loan that generates a random loan number
+        /// </summary>
+        /// <param name="custLastname">Customers Last Name</param>
+        /// <param name="custFirstname">Customers First Name</param>
+        public Loan( string custLastname, string custFirstname)
         {
-            this.LoanNumber = loanNumber;
-            this.CustLastname = custLastname;
-            this.CustFirstname = custFirstname;
-            this.LoanAmount = loanAmount;
-            this.InterestRate = interestRate;
-            this.Term = term;
-            if (loanAmount > maxLoanAmount)
-            {
-                this.LoanAmount = loanAmount;
-                Console.WriteLine("Max Loan Amount is R100 000");
-            }
-            else { this.LoanAmount = loanAmount; }
-            if (term != shortTerm || term != mediumTerm || term != longTerm)
-            {
-                this.term = shortTerm;
-            }
-            else { this.LoanAmount = term; }
-
+            LoanNumber = randomInteger();
+            CustLastname = custLastname;
+            CustFirstname = custFirstname;
         }
-
-        public string LoanNumber { get => loanNumber; set => loanNumber = value; }
-        public string CustLastname { get => custLastname; set => custLastname = value; }
-        public string CustFirstname { get => custFirstname; set => custFirstname = value; }
-        public double LoanAmount { get => loanAmount; set => loanAmount = value; }
-        public double InterestRate { get => interestRate; set => interestRate = value; }
-        public int Term { get => term; set => term = value; }
-        
+        /// <summary>
+        /// Loan number is randomly generated thus it only gets a get function
+        /// </summary>
+        public int LoanNumber { get;}
+        /// <summary>
+        /// Getter or Setter function for Customer Last Name
+        /// </summary>
+        public string CustLastname { get; set; }
+        /// <summary>
+        /// Getter or Setter function for Customer Last Name
+        /// </summary>
+        public string CustFirstname { get; set; }
+        /// <summary>
+        /// Getter or Setter for the amount that is being lent
+        /// </summary>
+        public double LoanAmount { get; set; }
+        /// <summary>
+        /// The interset rate in double format.
+        /// </summary>
+        public double InterestRate { get; set; }
+        /// <summary>
+        /// The amount of years before loan is payed back
+        /// </summary>
+        public int Term { get; set; }
+        /// <summary>
+        /// Loan to string function
+        /// </summary>
+        /// <returns>summary of loan</returns>
         public override string ToString()
         {
-             return $"Loan Number: \t \t{loanNumber} \n Customer lastname: \t{custLastname} \n Customer Name: \t{custFirstname} \n Loan Amount: \t\t{loanAmount} \n Interest Rate: \t {interestRate} \n Term: \t \t \t{term}";               
+             return $"Loan Number: {LoanNumber} \n Customer lastname: {CustLastname} \n Customer Name:{CustFirstname} \n Loan Amount: {LoanAmount} \n Interest Rate:  {InterestRate} \n Term: {Term}";               
         }
-        public abstract bool overMaxLoan(double value);
+        /// <summary>
+        /// Checks wether loan amount is more than max amount permitted
+        /// </summary>
+        /// <returns>boolean</returns>
+        public bool overMaxLoan()
+        {
+            if (LoanAmount > maxLoanAmount)
+            {
+                return true;
+            }
+            else { return false; }
+        }
+        /// <summary>
+        /// Checks wether the amount of years are one of the choices given
+        /// </summary>
+        /// <returns>boolean</returns>
+        public bool loanTermValid()
+        {
+            if (Term != shortTerm || Term != mediumTerm || Term != longTerm)
+            {
+                return false;
+            }
+            else { return true; }
+        }
+        /// <summary>
+        /// Creates a random interger between 0 and 10000
+        /// </summary>
+        /// <returns>Random integer</returns>
+        private int randomInteger()
+        {
+
+            var random = new Random();
+            return random.Next(0, 10000);
+
+        }
     }
 
 
