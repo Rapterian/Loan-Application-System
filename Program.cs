@@ -34,11 +34,11 @@ namespace Loan_Application_System
                     Console.Write("Enter Loan Amount:      \t");
                     loanAmount = float.Parse(Console.ReadLine());
                     //NEED TO CHANGE THIS TO METHOD FROM LOAN CLASS -> maxLoanAmount
-                    if (loanArray[i].overMaxLoan(loanAmount))
+                    if (loanAmount>100000)
                     {
                         Console.WriteLine("Loan amount exceeds R100 000. Please re-enter the loan amount.");
                     }
-                } while (loanArray[i].overMaxLoan(loanAmount));
+                } while (loanAmount > 100000);
 
                 Console.Write("Enter Interest Rate:     \t");
                 double interestRate = double.Parse(Console.ReadLine());
