@@ -40,9 +40,9 @@ namespace Loan_Application_System
         /// <param name="custFirstname">Customers First Name</param>
         public Loan( string custLastname, string custFirstname)
         {
-            this.LoanNumber = randomInteger();
-            this.CustLastname = custLastname;
-            this.CustFirstname = custFirstname;
+            LoanNumber = randomInteger();
+            CustLastname = custLastname;
+            CustFirstname = custFirstname;
         }
         /// <summary>
         /// Loan number is randomly generated thus it only gets a get function
