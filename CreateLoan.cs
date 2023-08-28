@@ -8,21 +8,21 @@ namespace Loan_Application_System
 {
     internal class CreateLoan : Loan
     {
-        private double primeIntRate;
+        private double primeInterestRate;
         public CreateLoan(double primeIntRate, string loanNumber, string custLastname, string custFirstname, double loanAmount, double interestRate, int term) : base(loanNumber, custLastname, custFirstname, loanAmount, interestRate, term)
         {
-            this.PrimeIntRate = primeIntRate;
+            this.PrimeInterestRate = primeIntRate;
         }
 
-        public double PrimeIntRate { get => primeIntRate; set => primeIntRate = value; }
+        public double PrimeInterestRate { get => primeInterestRate; set => primeInterestRate = value; }
 
-        public override double overMaxLoan()
+        public override bool overMaxLoan(double value)
         {
-            if (LoanAmount > 100000)
+            if (value > maxLoanAmount)
             {
-                return 1;
+                return true;
             }
-            else return 0;
+            else return false;
             
         }
     }

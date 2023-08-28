@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 
 namespace Loan_Application_System
 {
-    abstract class Loan
+    abstract class Loan:LoanConstants
     {
+        public int shortTerm { get { return 1; } }
+        public int mediumTerm { get { return 3; } }
+        public int longTerm { get { return 5; } }
+        public string companyName { get { return ""; } }
+        public double maxLoanAmount { get { return 100000d; } }
+
         private string loanNumber, custLastname, custFirstname;
         private double loanAmount, interestRate;
         private int term;
@@ -20,15 +26,15 @@ namespace Loan_Application_System
             this.LoanAmount = loanAmount;
             this.InterestRate = interestRate;
             this.Term = term;
-            if (loanAmount > 100000)
+            if (loanAmount > maxLoanAmount)
             {
                 this.LoanAmount = loanAmount;
                 Console.WriteLine("Max Loan Amount is R100 000");
             }
             else { this.LoanAmount = loanAmount; }
-            if (term != 1 || term != 3 || term != 5)
+            if (term != shortTerm || term != mediumTerm || term != longTerm)
             {
-                this.term = 1;
+                this.term = shortTerm;
             }
             else { this.LoanAmount = term; }
 
@@ -45,7 +51,7 @@ namespace Loan_Application_System
         {
              return $"Loan Number: \t \t{loanNumber} \n Customer lastname: \t{custLastname} \n Customer Name: \t{custFirstname} \n Loan Amount: \t\t{loanAmount} \n Interest Rate: \t {interestRate} \n Term: \t \t \t{term}";               
         }
-        public abstract double overMaxLoan();
+        public abstract bool overMaxLoan(double value);
     }
 
 
