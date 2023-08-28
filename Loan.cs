@@ -12,7 +12,7 @@ namespace Loan_Application_System
         public int mediumTerm { get { return 3; } }
         public int longTerm { get { return 5; } }
         public string companyName { get { return ""; } }
-        public double maxLoanAmount { get { return 10000d; } }
+        public double maxLoanAmount { get { return 100000d; } }
 
         private string loanNumber, custLastname, custFirstname;
         private double loanAmount, interestRate;
@@ -51,7 +51,7 @@ namespace Loan_Application_System
         {
              return $"Loan Number: \t \t{loanNumber} \n Customer lastname: \t{custLastname} \n Customer Name: \t{custFirstname} \n Loan Amount: \t\t{loanAmount} \n Interest Rate: \t {interestRate} \n Term: \t \t \t{term}";               
         }
-        public abstract double overMaxLoan();
+        public abstract bool overMaxLoan(double value);
     }
 
 
