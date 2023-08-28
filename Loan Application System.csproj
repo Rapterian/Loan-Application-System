@@ -43,6 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+
+    <Compile Include="BusinessLoan.cs" />
+    <Compile Include="CreateLoan.cs" />
+    <Compile Include="Loan.cs" />
+    <Compile Include="PersonalLoan.cs" />
+
+    <Compile Include="CreateLoan.cs" />
+    <Compile Include="Loan.cs" />
+
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
