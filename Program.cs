@@ -11,6 +11,7 @@ namespace Loan_Application_System
         static void Main(string[] args)
         {
 
+
             Console.Write("Enter Prime Interest Rate:\t");
             double primeInterestRate = double.Parse(Console.ReadLine());
 
@@ -28,7 +29,9 @@ namespace Loan_Application_System
                 Console.Write("Enter Lastname:\t");
                 string custLastname = Console.ReadLine();
 
+
                 CreateLoan newLoan = new CreateLoan(primeInterestRate, custFirstname, custLastname);
+
                 loanArray[i] = newLoan;
 
                 do
@@ -57,23 +60,23 @@ namespace Loan_Application_System
 
 
             }
-
+            Console.Clear();    
             foreach (CreateLoan loan in loanArray)
             {
-                Console.WriteLine(loan.ToString());
-            }
 
 
 
         }
 
         static double doubleCheck(Loan loan)
+
         {
             double loanAmount = 0;
             do
             {
                 try
                 {
+
                     Console.WriteLine("Enter loan amount:");
                     loanAmount = double.Parse(Console.ReadLine());
                     if (loan.overMaxLoan())
@@ -81,6 +84,7 @@ namespace Loan_Application_System
                         Console.WriteLine("Loan cannot be more than R100 000. Please re-enter loan amount.");
                     }
                     else if (loan.underMinLoan())
+
                     {
                         Console.WriteLine("Loan is too small. Please re-enter loan amount.");
                     }
@@ -89,7 +93,9 @@ namespace Loan_Application_System
                 {
                     Console.WriteLine("Loan has invalid input. Please re-enter.");
                 }
+
             } while (loan.overMaxLoan() || loan.underMinLoan());
+
 
             return loanAmount;
         }
