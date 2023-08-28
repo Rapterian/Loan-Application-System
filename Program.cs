@@ -13,7 +13,7 @@ namespace Loan_Application_System
 
             CreateLoan[] loanArray = new CreateLoan[5];
             List<CreateLoan> loanList = new List<CreateLoan>();
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 1; i++)
             {
                 Console.Clear();
                 Console.Write("Enter Prime Interest Rate:\t");
@@ -43,10 +43,10 @@ namespace Loan_Application_System
                 Console.Write("Enter Interest Rate:     \t");
                 double interestRate = double.Parse(Console.ReadLine());
 
-                Console.Write($"Terms:" +
-                    $"short-term:{loanArray[i].shortTerm}" +
-                    $"medium-term:{loanArray[i].mediumTerm}" +
-                    $"long-term:{loanArray[i].longTerm}" +
+                Console.Write($"Terms:\n" +
+                    $"short-term:1\n" +
+                    $"medium-term:3\n" +
+                    $"long-term:5\n2" +
                     $"Enter Term:                       \t");
                 int term = int.Parse(Console.ReadLine());
 
