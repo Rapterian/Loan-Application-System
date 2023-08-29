@@ -16,5 +16,6 @@ namespace Loan_Application_System
         int longTerm { get; }
         string companyName { get; }
         double maxLoanAmount { get; }
+        double minLoanAmount { get; }
     }
 }

@@ -12,20 +12,24 @@ namespace Loan_Application_System
         public PersonalLoan(double interestRate,string custLastname, string custFirstname,double loanAmount) : 
             base(interestRate, custLastname, custFirstname)
         {
-
+            calcInterestRate();
         }
-        private double calcPersonalLoanFee()
+
+        private void calcInterestRate()
         {
-            double loanFee = 0;
-            loanFee = LoanAmount * PersonalIntRate;
-            return loanFee;
+            InterestRate = InterestRate + 2d;
         }
 
         public double calcPersonalTotalAmountDue()
         {
             double totalAmountDue = 0;
-            totalAmountDue = LoanAmount + InterestRate + calcPersonalLoanFee();
+            totalAmountDue = LoanAmount + CalculateInterest();
             return totalAmountDue;
         }
+        public override string ToString()
+        {
+            return $"Loan Number: {LoanNumber} \n Customer: {CustLastname}+ {CustFirstname} \n Loan Amount: {LoanAmount} \n Interest Rate:  {InterestRate} \n Term: {Term} years \n Total Amount Due: {calcPersonalTotalAmountDue()}";
+        }
     }
+
 }

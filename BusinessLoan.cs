@@ -12,21 +12,23 @@ namespace Loan_Application_System
         static double BuisnessIntRate = 0.01;
         public BusinessLoan(double interestRate, string custLastname, string custFirstname) :
             base(interestRate, custLastname, custFirstname)
-        { 
-
-        }
-        private double calcBuisnessLoanFee()
         {
-            double loanFee = 0;
-            loanFee = LoanAmount * BuisnessIntRate;
-            return loanFee;
+            calcInterestRate();
+        }
+        private void calcInterestRate()
+        {
+            InterestRate = InterestRate + 1d;
         }
 
         public double calcBuisnessTotalAmountDue()
         {
             double totalAmountDue = 0;
-            totalAmountDue = LoanAmount + InterestRate + calcBuisnessLoanFee();
+            totalAmountDue = LoanAmount + CalculateInterest();
             return totalAmountDue;
+        }
+        public override string ToString()
+        {
+            return $"Loan Number: {LoanNumber} \n Customer: {CustLastname}+ {CustFirstname} \n Loan Amount: {LoanAmount} \n Interest Rate:  {InterestRate} \n Term: {Term} years \n Total Amount Due: {calcBuisnessTotalAmountDue()}";
         }
     }
 }
