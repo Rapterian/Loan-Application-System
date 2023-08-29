@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,18 +14,17 @@ namespace Loan_Application_System
         {
 
         }
-
-        private double calcLoanFee()
+        private double calcPersonalLoanFee()
         {
-            double fee = 0;
-            //TODO - LoanFee = LoanAmount * PersonalInt...
-            return fee;
+            double loanFee = 0;
+            loanFee = LoanAmount * PersonalIntRate;
+            return loanFee;
         }
 
-        public double calcTotalAmountDue()
+        public double calcPersonalTotalAmountDue()
         {
             double totalAmountDue = 0;
-            //TODO - TotalAmountDue = LoanAmount + interestRate + calcLoanFee()
+            totalAmountDue = LoanAmount + InterestRate + calcPersonalLoanFee();
             return totalAmountDue;
         }
     }
