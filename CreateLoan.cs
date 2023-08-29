@@ -12,12 +12,13 @@ namespace Loan_Application_System
         {
         }
 
-        public double CalculateInterest()
+        protected double CalculateInterest()
         {
             double interest=0;
             interest = LoanAmount * InterestRate * Term;
             return interest;
         }
+
     }
 
 }
