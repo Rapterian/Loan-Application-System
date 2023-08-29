@@ -3,6 +3,7 @@ using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
@@ -95,12 +96,14 @@ namespace Loan_Application_System
         /// <summary>
         /// Checks wether the amount of years are one of the choices given
         /// </summary>
-        /// <returns>boolean</returns>
-        public void loanTermValid(string term)
+        /// <returns></returns>
+        public void loanTermValid()
         {
             if (Term != shortTerm || Term != mediumTerm || Term != longTerm)
             {
                 Console.WriteLine($"Term duration is not one of the options given. Term amount will be set to {shortTerm}");
+                Term = shortTerm;
+                Thread.Sleep(3000);
             }
         }
         /// <summary>

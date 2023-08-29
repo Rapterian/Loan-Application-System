@@ -15,7 +15,7 @@ namespace Loan_Application_System
         protected double CalculateInterest()
         {
             double interest=0;
-            interest = LoanAmount * InterestRate * Term;
+            interest = LoanAmount * InterestRate/100 * Term;
             return interest;
         }
 

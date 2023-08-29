@@ -28,7 +28,7 @@ namespace Loan_Application_System
         }
         public override string ToString()
         {
-            return $"Loan Number: {LoanNumber} \n Customer: {CustLastname}+ {CustFirstname} \n Loan Amount: {LoanAmount} \n Interest Rate:  {InterestRate} \n Term: {Term} years \n Total Amount Due: {calcBuisnessTotalAmountDue()}";
+            return $" Loan Number: {LoanNumber} \n Customer: {CustLastname} {CustFirstname} \n Loan Amount: R{LoanAmount} \n Loan Type: Business\n Interest Rate:  {InterestRate}% \n Term: {Term} year(s) \n Total Amount Due: R{calcBuisnessTotalAmountDue()}";
         }
     }
 }
