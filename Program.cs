@@ -60,31 +60,34 @@ namespace Loan_Application_System
 
 
             }
-            Console.Clear();    
+            Console.Clear();
             foreach (CreateLoan loan in loanArray)
             {
 
 
 
+            }
+
+
         }
-
-        static double doubleCheck(Loan loan)
-
+        /// <summary>
+        /// Checks if input value is of type double.
+        /// </summary>
+        /// <returns></returns>
+        static double doubleCheck()
         {
             double loanAmount = 0;
             do
             {
                 try
                 {
-
                     Console.WriteLine("Enter loan amount:");
                     loanAmount = double.Parse(Console.ReadLine());
-                    if (loan.overMaxLoan())
+                    if (loanAmount > 100000)
                     {
                         Console.WriteLine("Loan cannot be more than R100 000. Please re-enter loan amount.");
                     }
-                    else if (loan.underMinLoan())
-
+                    else if (loanAmount < 5000)
                     {
                         Console.WriteLine("Loan is too small. Please re-enter loan amount.");
                     }
@@ -93,11 +96,86 @@ namespace Loan_Application_System
                 {
                     Console.WriteLine("Loan has invalid input. Please re-enter.");
                 }
-
-            } while (loan.overMaxLoan() || loan.underMinLoan());
-
-
+            } while (loanAmount > 100000 || loanAmount < 5000);
             return loanAmount;
+        }
+        /// <summary>
+        /// Checks if user name or surname has special characters or numbers.
+        /// </summary>
+        /// <param name="inputText"></param>
+        /// <returns></returns>
+        static string specialCharCheck(string inputText)
+        {
+            int counter = 0;
+            string[] numbersArray = new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+            string[] specialArray = new string[] { "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "+", "=", "`", "~", ",", "<", ">", ".", "/", "?", "|", ";", ":", "'", "", "[", "]", " " };
+
+            for (int i = 0; i < inputText.Length; i++)
+            {
+                counter++;
+                while (numbersArray.Contains(inputText[i].ToString()) || specialArray.Contains(inputText[i].ToString()) || counter > 13)
+                {
+                    Console.WriteLine("There is an invalid character or name is too long. Please re-enter:");
+                    inputText = Console.ReadLine();
+                }
+
+            }
+            return inputText;
+
+        }
+        /// <summary>
+        /// Checks if term duration is either 1, 3, or 5. If it is neither, it is automatically set to 1. If it is a letter or special character, a exception will be called.
+        /// </summary>
+        /// <returns></returns>
+        static int intCheck()
+        {
+            int termDuration = 1;
+            do
+            {
+                try
+                {
+                    Console.WriteLine("Enter Term duration:");
+                    termDuration = int.Parse(Console.ReadLine());
+                    if (termDuration != 1 || termDuration != 3 || termDuration != 5)
+                    {
+                        termDuration = 1;
+                    }
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Term duration has invalid input. Please re-enter.");
+                }
+            } while (termDuration != 1 || termDuration != 3 || termDuration != 5);
+            return termDuration;
+        }
+        /// <summary>
+        /// Checks whether the Prime Interest Rate is more than 100% or lower than 1%.
+        /// </summary>
+        /// <returns></returns>
+        static double primeInterestCheck()
+        {
+            double primeInterest = 0;
+            do
+            {
+                try
+                {
+                    Console.WriteLine("Enter Prime interest rate:\t");
+                    primeInterest = double.Parse(Console.ReadLine());
+                    if (primeInterest > 100)
+                    {
+                        Console.WriteLine("Prime interest rate cannot be more than 100%. Please re-enter interest rate.");
+                    }
+                    else if (primeInterest < 1)
+                    {
+                        Console.WriteLine("Prime interest rate is too small. Please re-enter interest rate.");
+                    }
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Prime interest rate has invalid input. Please re-enter.");
+                }
+            } while (primeInterest > 100 || primeInterest < 1);
+            return primeInterest;
         }
 
     }
