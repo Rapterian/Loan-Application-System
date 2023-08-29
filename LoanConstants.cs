@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Loan_Application_System
 {
+    /// <summary>
+    /// Interface that forces Loan Constants
+    /// </summary>
     public interface LoanConstants
     {
         int shortTerm { get; }
