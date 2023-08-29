@@ -12,7 +12,7 @@ namespace Loan_Application_System
         static void Main(string[] args)
         {
             string input;
-            Console.Write($"Enter Prime Interest Rate(%):");
+            Console.Write($"Enter Prime Interest Rate(%):\t");
 
             //stores the prime interest rate given as well as checking to make sure the
             //value given is valid
@@ -28,78 +28,74 @@ namespace Loan_Application_System
             {
                 Console.Clear();
                 Console.Write($"Prime Interest Rate(%):\t{primeInterestRate}%\n");
+                Console.WriteLine("=============================================");
 
                 Console.Write("Enter Firstname:\t");
                 input= Console.ReadLine();
                 string custFirstname = Loan.nameCheck(input);
 
-                Console.Write("Enter Lastname:\t");
+                Console.Write("Enter Lastname: \t");
                 input = Console.ReadLine();
                 string custLastname = Loan.nameCheck(input);
 
 
+                Console.Write("Personal(P) or Buisness(B) Loan:  ");
+                input = Console.ReadLine();
+                while (!Checks.checkLoanType(input))
+                {
+                    Console.WriteLine("Please re-enter:");
+                    input = Console.ReadLine();
+                }
+                char loanType = char.Parse(input.ToUpper());
+                if (loanType == 'P')
+                {
+                    PersonalLoan newLoan = new PersonalLoan(primeInterestRate, custFirstname, custLastname);
+                    loanList.Add(newLoan);
+                }
+                else
+                {
+                    BusinessLoan newLoan = new BusinessLoan(primeInterestRate, custFirstname, custLastname);
+                    loanList.Add(newLoan);
+                }
 
-                CreateLoan newLoan = new CreateLoan(primeInterestRate, custFirstname, custLastname);
-
-                loanList.Add(newLoan);
+                
 
                 Console.Write("Enter Loan Amount:\t");
                 input = Console.ReadLine();
                 loanList[i].LoanAmount = Loan.loanAmountCheck(input, loanList[i].minLoanAmount, loanList[i].maxLoanAmount); ;
 
-                Console.Write($"Loan term ({loanList[i].shortTerm} for Short Term, {loanList[i].mediumTerm} for Medium Term, {loanList[i].longTerm} for Long Term):");
+                Console.Write($"Loan term ({loanList[i].shortTerm} for Short Term, {loanList[i].mediumTerm} for Medium Term, {loanList[i].longTerm} for Long Term):\t");
                 string loanTerm=Console.ReadLine();
                 while (!Checks.isInt(loanTerm))
                 {
-                    Console.WriteLine("Please Re-enter:");
+                    Console.WriteLine("Please re-enter:");
                     loanTerm = Console.ReadLine();
                 }
                 loanList[i].Term = int.Parse(loanTerm);
+                loanList[i].loanTermValid();
 
-                Console.Write("Personal(P) or Buisness(B) Loan:");
-                char loanType = char.Parse(Console.ReadLine());
-                if (loanType == 'P')
-                {
-                    PersonalLoan personal = (PersonalLoan)loanList[i];
-                }
-                else
-                {
-                    BusinessLoan personal = (BusinessLoan)loanList[i];
-                }
+
+                
 
 
             }
             Console.Clear();
+            Console.WriteLine("===========");
+            Console.WriteLine("  Summary");
+            Console.WriteLine("===========");
             foreach (CreateLoan loan in loanList)
-            {
+            { 
+                Console.WriteLine();
                 Console.WriteLine(loan.ToString());
+
             }
+            Console.ReadLine();
 
 
         }
 
 
-        static string checkLoanType()
-        {
-            bool validInput = false;
-            char inputText;
-            do
-            {
-                Console.WriteLine("Enter loan type: Please type 'P' for personal or 'B' business.");
-                inputText = Console.ReadKey().KeyChar;
-                if (inputText == 'P' || inputText == 'p' || inputText == 'B' || inputText == 'b')
-                {
-                    validInput = true;
-                    Console.WriteLine("");
-                }
-                else
-                {
-                    Console.WriteLine("Invalid Loan type. Please re-enter.");
-                    validInput = false;
-                }
-            } while (!validInput);
-            return inputText.ToString().ToUpper();
-        }
+        
 
 
     }

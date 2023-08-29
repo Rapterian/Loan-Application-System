@@ -23,7 +23,7 @@ namespace Loan_Application_System
             }
             catch (FormatException)
             {
-                Console.WriteLine("Value enterd is not a double. Please re-enter:");
+                Console.WriteLine("Value enterd is not a double.");
                 return false;
             }
             return true;
@@ -49,7 +49,7 @@ namespace Loan_Application_System
             }
             if (counter > 0)
             {
-                Console.WriteLine("There is an invalid character in this string. Please re-enter:");
+                Console.WriteLine("There is an invalid character in this string.");
                 return true;
             }
             return false;
@@ -67,12 +67,12 @@ namespace Loan_Application_System
 
             if (inputText.Length > max)
             {
-                Console.WriteLine("String can be no more than 50 charecters. Please re-enter:");
+                Console.WriteLine("String can be no more than 50 charecters.");
                 return false;
             }
             if (inputText.Length < min)
             {
-                Console.WriteLine("String can be no less than 2 charecters. Please re-enter:");
+                Console.WriteLine("String can be no less than 2 charecters.");
                 return false;
             }
             return true;
@@ -93,7 +93,7 @@ namespace Loan_Application_System
             }
             catch (FormatException)
             {
-                Console.WriteLine("Value enterd is not a integer. Please re-enter:");
+                Console.WriteLine("Value enterd is not a integer.");
                 return false;
             }
             return true;
@@ -110,15 +110,36 @@ namespace Loan_Application_System
         {
             if (value > 100)
             {
-                Console.WriteLine("Percentage can't be more than 100. Please re-enter:");
+                Console.WriteLine("Percentage can't be more than 100.");
                 return false;
             }
             if (value < 0)
             {
-                Console.WriteLine("Percentage can't be less than 0. Please re-enter:");
+                Console.WriteLine("Percentage can't be less than 0.");
                 return false;
             }
             return true;
+        }
+
+        public static bool checkLoanType(string value)
+        {
+            value = value.ToUpper();
+            try
+            {
+                char.Parse(value);
+            }
+            catch
+            {
+                Console.WriteLine("Value enterd is not a charector.");
+                return false;
+            }
+            char inputText = char.Parse(value);
+
+            if (inputText == 'P' || inputText == 'B' )
+            {
+                return true;
+            }
+            return false;
         }
 
     }

@@ -9,7 +9,7 @@ namespace Loan_Application_System
     internal class PersonalLoan : CreateLoan
     {
         static double PersonalIntRate=0.02;
-        public PersonalLoan(double interestRate,string custLastname, string custFirstname,double loanAmount) : 
+        public PersonalLoan(double interestRate,string custLastname, string custFirstname) : 
             base(interestRate, custLastname, custFirstname)
         {
             calcInterestRate();
@@ -28,7 +28,7 @@ namespace Loan_Application_System
         }
         public override string ToString()
         {
-            return $"Loan Number: {LoanNumber} \n Customer: {CustLastname}+ {CustFirstname} \n Loan Amount: {LoanAmount} \n Interest Rate:  {InterestRate} \n Term: {Term} years \n Total Amount Due: {calcPersonalTotalAmountDue()}";
+            return $" Loan Number: {LoanNumber} \n Customer: {CustLastname} {CustFirstname} \n Loan Amount: R{LoanAmount}\n  Loan Type: Personal\n Interest Rate:  {InterestRate}% \n Term: {Term} year(s) \n Total Amount Due: R{calcPersonalTotalAmountDue()}";
         }
     }
 
