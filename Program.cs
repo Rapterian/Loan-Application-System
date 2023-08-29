@@ -76,10 +76,7 @@ namespace Loan_Application_System
 
 
         }
-        
-        
-        
-        
+
 
     }
 }
