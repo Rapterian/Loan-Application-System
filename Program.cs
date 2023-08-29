@@ -177,6 +177,7 @@ namespace Loan_Application_System
             } while (primeInterest > 100 || primeInterest < 1);
             return primeInterest;
         }
+        //Comment
 
     }
 }
