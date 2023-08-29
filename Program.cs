@@ -30,6 +30,7 @@ namespace Loan_Application_System
                 string custLastname = Console.ReadLine();
 
 
+
                 CreateLoan newLoan = new CreateLoan(primeInterestRate, custFirstname, custLastname);
 
                 loanArray[i] = newLoan;
@@ -177,7 +178,31 @@ namespace Loan_Application_System
             } while (primeInterest > 100 || primeInterest < 1);
             return primeInterest;
         }
-        //Comment
+        /// <summary>
+        /// Checks if loan type is either 'P' for personal loans, or 'B' for business loans.
+        /// </summary>
+        /// <returns></returns>
+        static string checkLoanType()
+        {
+            bool validInput = false;
+            char inputText;
+            do
+            {
+                Console.WriteLine("Enter loan type: Please type 'P' for personal or 'B' business.");
+                inputText = Console.ReadKey().KeyChar;
+                if (inputText == 'P' || inputText == 'p' || inputText == 'B' || inputText == 'b')
+                {
+                    validInput = true;
+                    Console.WriteLine("");
+                }
+                else
+                {
+                    Console.WriteLine("Invalid Loan type. Please re-enter.");
+                    validInput = false;
+                }
+            } while (!validInput);
+            return inputText.ToString().ToUpper();
+        }
 
     }
 }
