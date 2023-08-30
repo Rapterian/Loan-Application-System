@@ -1,8 +1,11 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Loan_Application_System
 {
@@ -11,7 +14,7 @@ namespace Loan_Application_System
     /// This base class stores all necesary info about a loan in one object
     /// as well as have some useful functions.
     /// </summary>
-    abstract class Loan:LoanConstants
+    abstract class Loan : LoanConstants
     {
         /// <summary>
         /// The constant amount of years for the Short Term 
@@ -34,11 +37,15 @@ namespace Loan_Application_System
         /// </summary>
         public double maxLoanAmount { get { return 100000d; } }
         /// <summary>
+        /// The min amount you may borrow as a constant
+        /// </summary>
+        public double minLoanAmount { get { return 500d; } }
+        /// <summary>
         /// Constructor for a Loan that generates a random loan number
         /// </summary>
         /// <param name="custLastname">Customers Last Name</param>
         /// <param name="custFirstname">Customers First Name</param>
-        public Loan(double interestRate ,string custLastname, string custFirstname)
+        public Loan(double interestRate, string custLastname, string custFirstname)
         {
             LoanNumber = randomInteger();
             CustLastname = custLastname;
@@ -55,7 +62,7 @@ namespace Loan_Application_System
         /// <summary>
         /// Loan number is randomly generated thus it only gets a get function
         /// </summary>
-        public int LoanNumber { get;}
+        public int LoanNumber { get; }
         /// <summary>
         /// Getter or Setter function for Customer Last Name
         /// </summary>
@@ -82,43 +89,22 @@ namespace Loan_Application_System
         /// <returns>summary of loan</returns>
         public override string ToString()
         {
-             return $"Loan Number: {LoanNumber} \n Customer lastname: {CustLastname} \n Customer Name:{CustFirstname} \n Loan Amount: {LoanAmount} \n Interest Rate:  {InterestRate} \n Term: {Term}";               
+            return $"Loan Number: {LoanNumber} \n Customer lastname: {CustLastname} \n Customer Name:{CustFirstname} \n Loan Amount: {LoanAmount} \n Interest Rate:  {InterestRate} \n Term: {Term}";
         }
-        /// <summary>
-        /// Checks wether loan amount is more than max amount permitted
-        /// </summary>
-        /// <returns>boolean</returns>
-        public bool overMaxLoan()
-        {
-            if (LoanAmount > maxLoanAmount)
-            {
-                return true;
-            }
-            else { return false; }
-        }
-        /// <summary>
-        /// Checks wether loan amount is less than min amount permitted
-        /// </summary>
-        /// <returns>boolean</returns>
-        public bool underMinLoan()
-        {
-            if (LoanAmount < maxLoanAmount)
-            {
-                return true;
-            }
-            else { return false; }
-        }
+
+
         /// <summary>
         /// Checks wether the amount of years are one of the choices given
         /// </summary>
-        /// <returns>boolean</returns>
-        public bool loanTermValid()
+        /// <returns></returns>
+        public void loanTermValid()
         {
             if (Term != shortTerm || Term != mediumTerm || Term != longTerm)
             {
-                return false;
+                Console.WriteLine($"Term duration is not one of the options given. Term amount will be set to {shortTerm}");
+                Term = shortTerm;
+                Thread.Sleep(3000);
             }
-            else { return true; }
         }
         /// <summary>
         /// Creates a random interger between 0 and 10000
@@ -130,6 +116,56 @@ namespace Loan_Application_System
             var random = new Random();
             return random.Next(0, 10000);
 
+        }
+
+        public static string nameCheck(string name)
+        {
+            while (!Checks.stringLengthCheck(name, 2, 50) || Checks.hasSpecialCharector(name))
+            {
+                Console.WriteLine("Please re-enter:");
+                name = Console.ReadLine();
+            }
+            return name;
+        }
+
+        public static double loanAmountCheck(string loanAmount, double min, double max)
+        {
+            while (!Checks.isDouble(loanAmount))
+            {
+                Console.WriteLine("Please re-enter:");
+                loanAmount = Console.ReadLine();
+            }
+            double loanAmountAsDouble = double.Parse(loanAmount);
+            while (loanAmountAsDouble < min)
+            {
+                Console.WriteLine($"Loan Amount can't be less than {min}.\nPlease re-enter:");
+                loanAmount = Console.ReadLine();
+                loanAmountAsDouble= loanAmountCheck(loanAmount, min, max);
+            }
+            while (loanAmountAsDouble > max)
+            {
+                Console.WriteLine($"Loan Amount can't be more than {max}.\nPlease re-enter:");
+                loanAmount = Console.ReadLine();
+                loanAmountAsDouble = loanAmountCheck(loanAmount, min, max);
+            }
+            return loanAmountAsDouble;
+        }
+
+        public static double interestRateCheck(string interestRate)
+        {
+            while (!Checks.isDouble(interestRate))
+            {
+                Console.WriteLine("Please re-enter:");
+                interestRate = Console.ReadLine();
+            }
+            double interestRateAsDouble = double.Parse(interestRate);
+            while (!Checks.isPercentage(interestRateAsDouble))
+            {
+                Console.WriteLine($"Please re-enter:");
+                interestRate = Console.ReadLine();
+                interestRateAsDouble= interestRateCheck(interestRate);
+            }
+            return interestRateAsDouble;
         }
     }
 
