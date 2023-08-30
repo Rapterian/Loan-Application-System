@@ -11,6 +11,12 @@ namespace Loan_Application_System
     /// </summary>
     internal class CreateLoan : Loan
     {
+        /// <summary>
+        /// create loan constructor that only takes in the nessasary parameters
+        /// </summary>
+        /// <param name="interestRate"></param>
+        /// <param name="custLastname"></param>
+        /// <param name="custFirstname"></param>
         public CreateLoan(double interestRate, string custLastname, string custFirstname) : base(interestRate, custLastname, custFirstname)
         {
         }
