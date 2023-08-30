@@ -43,8 +43,9 @@ namespace Loan_Application_System
         /// <summary>
         /// Constructor for a Loan that generates a random loan number
         /// </summary>
-        /// <param name="custLastname">Customers Last Name</param>
-        /// <param name="custFirstname">Customers First Name</param>
+        /// <param name="interestRate"></param>
+        /// <param name="custLastname"></param>
+        /// <param name="custFirstname"></param>
         public Loan(double interestRate, string custLastname, string custFirstname)
         {
             LoanNumber = randomInteger();
@@ -52,7 +53,11 @@ namespace Loan_Application_System
             CustFirstname = custFirstname;
             InterestRate = interestRate;
         }
-
+        /// <summary>
+        /// constructor overload that accepts only customer names
+        /// </summary>
+        /// <param name="custLastname"></param>
+        /// <param name="custFirstname"></param>
         protected Loan(string custLastname, string custFirstname)
         {
             CustLastname = custLastname;
@@ -96,9 +101,9 @@ namespace Loan_Application_System
         /// <summary>
         /// Checks wether the amount of years are one of the choices given
         /// </summary>
-        /// <returns></returns>
         public void loanTermValid()
         {
+            //TODO - Loan Term bug fix 
             if (Term != shortTerm || Term != mediumTerm || Term != longTerm)
             {
                 Console.WriteLine($"Term duration is not one of the options given. Term amount will be set to {shortTerm}");
@@ -117,7 +122,11 @@ namespace Loan_Application_System
             return random.Next(0, 10000);
 
         }
-
+        /// <summary>
+        /// asks for name until the name given is valid
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>string</returns>
         public static string nameCheck(string name)
         {
             while (!Checks.stringLengthCheck(name, 2, 50) || Checks.hasSpecialCharector(name))
@@ -127,44 +136,69 @@ namespace Loan_Application_System
             }
             return name;
         }
-
+        /// <summary>
+        /// asks for loan amount untill value given is valid
+        /// </summary>
+        /// <param name="loanAmount"></param>
+        /// <param name="min"></param>
+        /// <param name="max"></param>
+        /// <returns>double</returns>
         public static double loanAmountCheck(string loanAmount, double min, double max)
         {
+            //keep asking to re-enter the value until it is a double value
             while (!Checks.isDouble(loanAmount))
             {
                 Console.WriteLine("Please re-enter:");
                 loanAmount = Console.ReadLine();
             }
+            //after being sure it is a double value we can savely parse it into a doubl
             double loanAmountAsDouble = double.Parse(loanAmount);
+            //keep asking to re-enter the value until it is value that is above the min amount required
             while (loanAmountAsDouble < min)
             {
                 Console.WriteLine($"Loan Amount can't be less than {min}.\nPlease re-enter:");
                 loanAmount = Console.ReadLine();
+                //to make sure we don't pass this test but sneak past a previous check we recall
+                //the method to check all the check sagain
                 loanAmountAsDouble= loanAmountCheck(loanAmount, min, max);
             }
+            //keep asking to re-enter the value until it is value that is above the max amount required
             while (loanAmountAsDouble > max)
             {
                 Console.WriteLine($"Loan Amount can't be more than {max}.\nPlease re-enter:");
                 loanAmount = Console.ReadLine();
+                //to make sure we don't pass this test but sneak past a previous check we recall
+                //the method to check all the check sagain
                 loanAmountAsDouble = loanAmountCheck(loanAmount, min, max);
             }
+            //after being sure all checks are passed we return the final correct 
             return loanAmountAsDouble;
         }
-
+        /// <summary>
+        /// asks for prime interest rate untill value given is valid
+        /// </summary>
+        /// <param name="interestRate"></param>
+        /// <returns>double</returns>
         public static double interestRateCheck(string interestRate)
         {
+            //keep asking to re-enter the value until it is a double
             while (!Checks.isDouble(interestRate))
             {
                 Console.WriteLine("Please re-enter:");
                 interestRate = Console.ReadLine();
             }
+            //after being sure it is a double value we can savely parse it into a doubl
             double interestRateAsDouble = double.Parse(interestRate);
+            //keep asking to re-enter the value until it is a valid percentage
             while (!Checks.isPercentage(interestRateAsDouble))
             {
                 Console.WriteLine($"Please re-enter:");
                 interestRate = Console.ReadLine();
-                interestRateAsDouble= interestRateCheck(interestRate);
+                //to make sure we don't pass this test but sneak past a previous check we recall
+                //the method to check all the check sagain
+                interestRateAsDouble = interestRateCheck(interestRate);
             }
+            //after being sure all checks are passed we return the final correct
             return interestRateAsDouble;
         }
     }
