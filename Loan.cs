@@ -103,8 +103,8 @@ namespace Loan_Application_System
         /// </summary>
         public void loanTermValid()
         {
-            //TODO - Loan Term bug fix 
-            if (Term != shortTerm || Term != mediumTerm || Term != longTerm)
+            
+            if (Term != shortTerm && Term != mediumTerm && Term != longTerm)
             {
                 Console.WriteLine($"Term duration is not one of the options given. Term amount will be set to {shortTerm}");
                 Term = shortTerm;
